@@ -69,3 +69,54 @@ global $pagenow;
 if ('post.php' == $pagenow || 'post-new.php' == $pagenow) {
   add_action('admin_head', __NAMESPACE__ . '\\wpse_125800_custom_publish_box');
 }
+
+/**
+ * Return `null` if an empty value is returned from ACF.
+ *
+ * @param mixed $value
+ * @param mixed $post_id
+ * @param array $field
+ *
+ * @return mixed
+ */
+function acf_nullify_empty($value, $post_id, $field) {
+    if (empty($value)) {
+        return null;
+    }
+    return $value;
+}
+add_filter('acf/format_value', 'acf_nullify_empty', 100, 3);
+
+/**
+ * Add "Styles" drop-down content or classes
+ */
+function tuts_mcekit_editor_settings($settings) {
+    $style_formats = array(
+        array(
+            'title' => 'Column',
+            'block' => 'div',
+            'classes' => 'flex-item',
+            'wrapper' => true
+        ),
+        array(
+            'title' => 'Column Container',
+            'block' => 'div',
+            'classes' => 'flex-container',
+            'wrapper' => true
+        ),
+        array(
+            'title' => 'Lien discret',
+            'selector' => 'a',
+            'classes' => 'link--discreet',
+            'wrapper' => false
+        ),
+    );
+
+    $settings['style_formats'] = json_encode( $style_formats );
+
+    return $settings;
+}
+
+add_filter('tiny_mce_before_init', __NAMESPACE__ . '\\tuts_mcekit_editor_settings');
+
+remove_filter( 'the_excerpt', 'wpautop' );
