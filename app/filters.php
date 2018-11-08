@@ -25,7 +25,7 @@ add_filter('get_sample_permalink_html', __NAMESPACE__ . '\\wpse_125800_sample_pe
 
 
 /**
- * Cache le lien 'View' sur les page et post
+ * Cache le lien 'View' sur les page, post et custom post type
  *
  * @param [type] $actions
  * @param [type] $post
@@ -48,7 +48,7 @@ add_filter('page_row_actions', __NAMESPACE__ . '\\wpse_125800_row_actions', 10, 
 add_filter('post_row_actions', __NAMESPACE__ . '\\wpse_125800_row_actions', 10, 2);
 
 /**
- * Change les options disponibles dans la boite 'publish'
+ * Réduit les options disponibles dans la boite 'publish'
  */
 function wpse_125800_custom_publish_box() {
   if (!is_admin()) {
