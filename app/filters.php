@@ -57,7 +57,7 @@ function wpse_125800_custom_publish_box() {
 
   $style = '';
   $style .= '<style type="text/css">';
-  $style .= '#edit-slug-box, #minor-publishing-actions, #visibility, .num-revisions, .curtime';
+  $style .= '#edit-slug-box, #minor-publishing-actions, #visibility, .num-revisions';
   $style .= '{display: none; }';
   $style .= '</style>';
 
